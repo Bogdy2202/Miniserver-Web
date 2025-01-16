@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Șterge Cărți - Biblioteca Virtuală</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+        .book-list {
+            margin-top: 20px;
+        }
+        .book-item {
+            background: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Șterge Cărți</h1>
+    <div class="container">
+        <label for="bookName">Numele cărții:</label>
+        <input type="text" id="bookName" placeholder="Introdu numele cărții">
+        <button onclick="deleteBookByName()">Șterge cartea</button>
+    </div>
+
+    <script>
+        function deleteBookByName() {
+            let bookName = document.getElementById("bookName").value.trim();
+            if (bookName === "") {
+                alert("Introdu numele unei cărți pentru a o șterge.");
+                return;
+            }
+            
+            fetch(`/books/${encodeURIComponent(bookName)}`, { method: 'DELETE' })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    document.getElementById("bookName").value = "";
+                })
+                .catch(error => console.error('Eroare la ștergerea cărții:', error));
+        }
+    </script>
+</body>
+</html>

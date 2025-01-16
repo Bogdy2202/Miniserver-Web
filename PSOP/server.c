@@ -17,7 +17,7 @@
 
 #define PORT 8080
 #define BUFFER_SIZE 1048576
-#define THREAD_POOL_SIZE 8
+#define THREAD_POOL_SIZE 4
 #define QUEUE_SIZE 50
 
 volatile sig_atomic_t server_running = 1;
@@ -551,7 +551,7 @@ void start_server()
         exit(EXIT_FAILURE);
     }
 
-    tpool_t *tp = tpool_create(4); // 4 fire de executie in pool
+    tpool_t *tp = tpool_create(THREAD_POOL_SIZE); // 4 fire de executie in pool
 
     printf("\n[INFO] Server pornit pe portul %d. Asteptam conexiuni...\n", PORT);
 

@@ -38,7 +38,7 @@ void signal_handler(int signal)
 {
     if (signal == SIGINT || signal == SIGTERM) 
     {
-        printf("\n[INFO] Serverul se inchide...\n");
+        //printf("\n[INFO] Serverul se inchide...\n");
         server_running = 0;
     }
 }
